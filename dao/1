@@ -106,15 +106,10 @@ func DeactiveAllSurveyByDate(){
 	}
 	currTime := time.Now()
 	for _,dat := range response{
-               if( currTime.After(dat.Time)){
-	        colQuerier := bson.M{"_id": dat.ID}
-                change := bson.M{"$set": bson.M{"status" :false }}
-		err1 := clctn.Update(colQuerier, change)
-	        if err1 != nil {
-		    panic(err1)
-	         } 
+               if( currTime.Before(dat.Time)){
+		 fmt.Println(dat.ID)
 	       }
 		
 	}
-	time.Sleep(10*time.Second)
+        return 
 	}
